@@ -399,6 +399,44 @@
             margin-right: auto;
         }
         
+        /* Estilos para os contadores */
+        .counters-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .counter-box {
+            background: rgba(26, 42, 108, 0.5);
+            border-radius: 15px;
+            padding: 25px;
+            min-width: 250px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(163, 217, 255, 0.2);
+        }
+        
+        .counter-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #a3d9ff;
+        }
+        
+        .counter-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff9e7d;
+            text-shadow: 0 0 10px rgba(255, 158, 125, 0.5);
+        }
+        
+        .counter-description {
+            font-size: 1rem;
+            margin-top: 10px;
+            color: #e3f2fd;
+            opacity: 0.8;
+        }
+        
         /* Personaliza a barra de rolagem */
         ::-webkit-scrollbar {
             width: 14px;
@@ -458,6 +496,15 @@
                 padding: 20px;
             }
             
+            .counter-box {
+                min-width: 200px;
+                padding: 20px;
+            }
+            
+            .counter-value {
+                font-size: 2rem;
+            }
+            
             /* Ajusta a barra de rolagem para mobile */
             ::-webkit-scrollbar {
                 width: 8px;
@@ -488,6 +535,27 @@
             <h1>Uma surpresa especial</h1>
             <div class="subtitle">para minha marianaa hihihi S2</div>
         </header>
+        
+        <!-- Contadores de dias -->
+        <div class="content-box">
+            <h2 style="color: #a3d9ff; margin-bottom: 25px;">Nossa linha do tempo</h2>
+            
+            <div class="counters-container">
+                <div class="counter-box">
+                    <div class="counter-title">Dias Juntos</div>
+                    <div id="days-passed" class="counter-value">0</div>
+                    <div class="counter-description">desde 26/07/2020</div>
+                </div>
+                
+                <div class="counter-box">
+                    <div class="counter-title">Dias Restantes (viagem)</div>
+                    <div id="days-remaining" class="counter-value">0</div>
+                    <div class="counter-description">até 16/01/2026</div>
+                </div>
+            </div>
+            
+            <p>amo estar ao seu lado, vamos fazer acontecer! ❤️</p>
+        </div>
         
         <div class="content-box">
             <p>oii, meu neném! fiz algo especial para expressar o quanto você é importante para mim e <strong>ALGUMAAAS</strong> das razões pelas quais te acho incrível!</p>
@@ -598,6 +666,35 @@
                     closeModal();
                 }
             });
+            
+            // Calcular e atualizar os contadores de dias
+            function updateDayCounters() {
+                // Data de início: 26/07/2020
+                const startDate = new Date(2020, 6, 26); // Mês é 0-indexed (julho = 6)
+                
+                // Data futura: 16/01/2026
+                const futureDate = new Date(2026, 0, 16); // Janeiro = 0
+                
+                // Data atual
+                const currentDate = new Date();
+                
+                // Calcular diferença em milissegundos
+                const diffTimePassed = currentDate - startDate;
+                
+                // Calcular diferença em dias (arredondar para baixo)
+                const diffDaysPassed = Math.floor(diffTimePassed / (1000 * 60 * 60 * 24));
+                
+                // Calcular diferença para data futura
+                const diffTimeRemaining = futureDate - currentDate;
+                const diffDaysRemaining = Math.floor(diffTimeRemaining / (1000 * 60 * 60 * 24));
+                
+                // Atualizar os elementos HTML
+                document.getElementById('days-passed').textContent = diffDaysPassed;
+                document.getElementById('days-remaining').textContent = diffDaysRemaining;
+            }
+            
+            // Inicializar e atualizar os contadores
+            updateDayCounters();
         });
         
         // Função para abrir o modal com a imagem
