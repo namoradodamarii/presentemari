@@ -1,0 +1,845 @@
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivos de eu ser apaixonado por você</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Menu de navegação */
+        /* Menu de navegação */
+.navigation-menu {
+    /* REMOVA esta linha: position: fixed; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 25, 47, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+        
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 20px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(to right, #4e4376, #2b5876);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, #2b5876, #4e4376);
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(to right, #a3d9ff, #64b5f6);
+            color: #0a192f;
+            font-weight: bold;
+        }
+        
+/* Remova também o padding-top do body */
+body {
+    background: linear-gradient(135deg, #0a192f, #112240, #0a192f);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow-x: hidden;
+    /* REMOVA esta linha: padding-top: 70px; */
+}
+        
+        /* Backgrounds para fotos */
+        .photo-background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            opacity: 0.15;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .bg-photo-1 {
+            background-image: url('imagens/foto1.png');
+            clip-path: polygon(0 0, 100% 0, 100% 40%, 0 60%);
+        }
+        
+        .bg-photo-2 {
+            background-image: url('imagens/foto2.png');
+            clip-path: polygon(0 40%, 100% 60%, 100% 100%, 0 100%);
+        }
+        
+        .bg-photo-3 {
+            background-image: url('imagens/foto3.png');
+            clip-path: circle(25% at 75% 25%);
+        }
+        
+        .bg-photo-4 {
+            background-image: url('imagens/foto4.png');
+            clip-path: circle(20% at 25% 75%);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.85), rgba(17, 34, 64, 0.9), rgba(10, 25, 47, 0.85));
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            z-index: 2;
+            padding: 40px 20px;
+        }
+        
+        header {
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .heart {
+            color: #ff6b6b;
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+            text-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-size: 3.8rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            color: #a3d9ff;
+            background: linear-gradient(45deg, #a3d9ff, #64b5f6, #90caf9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 1.8s ease-out;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            color: #e3f2fd;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .carousel {
+            position: relative;
+            min-height: 70vh;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+            background: rgba(26, 42, 108, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(163, 217, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            border-radius: 20px;
+            box-sizing: border-box;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .image-container {
+            width: 90%;
+            height: 45vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: linear-gradient(45deg, #4e4376, #2b5876, #1a2a6c);
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 3px solid transparent;
+            background-origin: border-box;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        
+        .slide-img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            transition: transform 0.5s ease;
+            cursor: pointer;
+        }
+        
+        .slide:hover .slide-img {
+            transform: scale(1.03);
+        }
+        
+        .slide:hover .image-container {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .slide-content {
+            max-width: 85%;
+            padding: 0 15px;
+        }
+        
+        .slide-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #a3d9ff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #a3d9ff, #64b5f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .slide-description {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #e3f2fd;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 20px;
+        }
+        
+        .nav-btn-carousel {
+            background: linear-gradient(to right, #4e4376, #2b5876);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-btn-carousel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, #2b5876, #4e4376);
+        }
+        
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            gap: 8px;
+            max-width: 90%;
+            padding: 0 15px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .dot.active {
+            background: #a3d9ff;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(163, 217, 255, 0.5);
+        }
+        
+        .hearts-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .heart-shape {
+            position: absolute;
+            font-size: 24px;
+            color: #ff6b6b;
+            animation: floatHeart 8s linear infinite;
+            opacity: 0;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(110vh) rotate(0deg);
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        footer {
+            margin: 60px auto 30px;
+            font-size: 1.1rem;
+            color: #a3d9ff;
+            z-index: 2;
+            padding: 25px;
+            background: rgba(26, 42, 108, 0.3);
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Modal para imagem expandida */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(163, 217, 255, 0.4);
+            animation: zoom 0.3s ease;
+        }
+        
+        @keyframes zoom {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .close:hover {
+            color: #ff6b6b;
+        }
+        
+        .modal-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #fff;
+            font-size: 1.2rem;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        /* Personaliza a barra de rolagem */
+        ::-webkit-scrollbar {
+            width: 14px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 25, 47, 0.8);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #4e4376, #2b5876);
+            border-radius: 10px;
+            border: 3px solid #0a192f;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #2b5876, #4e4376);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .slide-title {
+                font-size: 1.6rem;
+            }
+            
+            .slide-description {
+                font-size: 1rem;
+            }
+            
+            .carousel {
+                min-height: 65vh;
+            }
+            
+            .image-container {
+                height: 40vh;
+                width: 95%;
+                padding: 12px;
+            }
+            
+            .slide-content {
+                max-width: 95%;
+            }
+            
+            .nav-btn-carousel {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .dots-container {
+                gap: 6px;
+            }
+            
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
+            
+            footer {
+                margin: 40px auto 20px;
+                padding: 20px;
+            }
+            
+            /* Ajusta a barra de rolagem para mobile */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .carousel {
+                min-height: 60vh;
+            }
+            
+            .image-container {
+                height: 35vh;
+                padding: 10px;
+            }
+            
+            .slide {
+                padding: 20px 15px;
+            }
+            
+            .slide-title {
+                font-size: 1.4rem;
+                margin-bottom: 10px;
+            }
+            
+            .slide-description {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+            
+            .nav-btn-carousel {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Limites de responsividade para imagens muito grandes */
+        @media (min-width: 1200px) {
+            .image-container {
+                width: 80%;
+            }
+        }
+        
+        /* Limites para telas muito pequenas */
+        @media (max-height: 600px) {
+            .carousel {
+                min-height: 55vh;
+            }
+            
+            .image-container {
+                height: 30vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu de navegação -->
+    <nav class="navigation-menu">
+        <div class="nav-container">
+            <button class="nav-btn" onclick="navigateTo('index.html')">
+                <i class="fas fa-home"></i> Início
+            </button>
+            <button class="nav-btn active" onclick="navigateTo('motivo-bonita.html')">
+                <i class="fas fa-camera"></i> Fotos
+            </button>
+            <button class="nav-btn" onclick="navigateTo('videos.html')">
+                <i class="fas fa-video"></i> Vídeos
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Backgrounds para fotos -->
+    <div class="photo-background bg-photo-1"></div>
+    <div class="photo-background bg-photo-2"></div>
+    <div class="photo-background bg-photo-3"></div>
+    <div class="photo-background bg-photo-4"></div>
+    <div class="overlay"></div>
+    
+    <!-- Modal para imagem expandida -->
+    <div id="imageModal" class="modal">
+        <span class="close" id="closeModal">&times;</span>
+        <img class="modal-content" id="expandedImage">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+    
+    <div class="hearts-container" id="hearts-container"></div>
+    
+    <div class="container">
+        <header>
+            <div class="heart">❤</div>
+            <h1>Motivos de eu ser apaixonado por você</h1>
+            <div class="subtitle">35 razões que fazem meu coração bater mais forte</div>
+        </header>
+        
+        <div class="carousel">
+            <!-- Slides serão gerados pelo JavaScript -->
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-btn-carousel" id="prev-btn">
+                <i class="fas fa-arrow-left"></i> Anterior
+            </button>
+            <button class="nav-btn-carousel" id="next-btn">
+                Próxima <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+        
+        <div class="dots-container" id="dots-container">
+            <!-- Os dots serão gerados pelo JavaScript -->
+        </div>
+        
+        <footer>
+            Feito com <span class="heart" style="font-size: 1.2rem;">❤</span> especialmente para você, minha paixão
+        </footer>
+    </div>
+
+    <script>
+        // Função para navegação entre páginas
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        
+        // Dados para as 35 fotos e motivos
+        const slidesData = [
+            { image: 'imagens/foto1.png', title: 'A PRINCIPAL, minha vesguinha', description: 'e como eu poderia deixar de fora a minha vesguinha preferida????' },
+            { image: 'imagens/foto2.png', title: 'PRIMEIRA VEZ QUE CONSEGUIII COMPRAR COMIDINHA PRA ELA', description: 'olha essa lindeza comendo e ficando buxuda, SÓ pra mim!!!!!!!!' },
+            { image: 'imagens/foto3.png', title: 'ASDKASDKASDK primeira vez da peppaa', description: 'que coisinha mais linda minha carmed fini, meu senhor.' },
+            { image: 'imagens/foto4.png', title: 'O ENCONTRO', description: 'o dia que você se arrumou todinha para nosso webencontro, que calor. QUE MENINA LINDA MDS.' },
+            { image: 'imagens/foto5.png', title: 'BOLO BOLO BOLO', description: 'MEU AMOR, askdaksdkasdk nao fica brava comigo VOCE TAVA TAO LINDAAAAAAAAA' },
+            { image: 'imagens/foto6.png', title: 'ROSINHA', description: 'primeira vez que você dormiu todaaaaa de rosinha, uma graça minha barbiezinha.' },
+            { image: 'imagens/foto7.png', title: 'DIA DIA DIA', description: 'o dia que viramos acordadosss juntinhos e foi tão tranquilo (a bonita só quis saber do bolinho dela ao amanhecer hihihihi)' },
+            { image: 'imagens/foto8.png', title: 'NÃO ME ODEIA', description: 'MAL POSSO ESPERAR pra dormir do lado dessa lindeza em janeiro meu Deus!!!!!!!!' },
+            { image: 'imagens/foto9.png', title: 'seus olhinhos, ai', description: 'que coisa mais linda esses olhinhos tão expressivos. você pode tampar sua boquinha linda, MAS mesmo assim consigo ver seus sentimentos através da janelinha da sua alma.' },
+            { image: 'imagens/foto10.png', title: 'QUE RAIVA', description: 'nem quero comentar sobre. não acredito em uma coisa dessa.' },
+            { image: 'imagens/foto11.png', title: 'OLHINHOS OLHINHOS', description: 'ai mds ME ENCARA ASSIM PESSOALMENTE PFV QUERO SÓ OLHAR PRA VOCÊ POR TODOS OS 10 DIAS MEU AMOR' },
+            { image: 'imagens/foto12.png', title: 'hihihi amori²', description: 'o diaaa que você veio me mostrar o seu biscoito amori, é muito amori pra pouco lippie' },
+            { image: 'imagens/foto13.png', title: 'SUSHI', description: 'quando te levaram hot roll e você fez careta DASKKASDKASDAKS que fofaaaaaaaaaa não aguento' },
+            { image: 'imagens/foto14.png', title: 'MINHAS 2 GATINHAS', description: 'quando a nezuko apareceu na ligação pela primeira vezzzz UM AMOR e ficou DORMINDINHO' },
+            { image: 'imagens/foto15.png', title: 'meu coração.', description: 'ESSA FOTO - ESSE CABELO - ESSA FLOR - sem condições, que mulher é essa plmds' },
+            { image: 'imagens/foto16.png', title: 'meu coração pt2', description: 'ELA ELA ELA FAZENDO CORAÇÃO PRA MIM?????? PRA MIM????? ELA GOSTA DEU?' },
+            { image: 'imagens/foto17.png', title: 'DORMIU COM ELE', description: 'a primeira vez que você dormiu com nosso filho e ficou abraçando ele forte no meio da noite ❤️' },
+            { image: 'imagens/foto18.png', title: 'SE ARRUMOU CMG', description: 'ESSE TU SABE CLARAMENTEE, se arrumou rapidinho pq tava cheia de presa e FEZ questão de fazer call cmg antes de ir mesmo estando atrasadinha AI - detalhe pre capinha' },
+            { image: 'imagens/foto19.png', title: 'AS TOQUINHAS DUPLAS', description: 'PARA TUDO, A DUPLA MAIS LABUBÔNICA DE TOQUINHAAAAAAAAAAAA DESSE MUNDO.' },
+            { image: 'imagens/foto20.png', title: 'eu amo amo amo essa foto', description: 'QUE COISA LINDA, ela expressando com os olhinhos todos seus sentimentos enquanto faz uma oferenda com o Julho hihihi' },
+            { image: 'imagens/foto21.png', title: 'SOU APAIXONADO', description: 'MANO, QUE MINA É ESSA TIO QUE COISA LINDA FAZENDO X PRA MIM AI AI COMO QUE CASA? CD A ALIANÇA NESSES DEDO' },
+            { image: 'imagens/foto22.png', title: 'OI GATINHA (HELLO KITTY)', description: 'A I M D S, que gatinha minha gatinha PFV PFV CASA CO EU eu qwuero você pra toddo semprie' },
+            { image: 'imagens/foto23.png', title: 'LENDO TEXTINHO', description: 'ELA LENDO O MEU TEXTINHO E CHORANDINHO, QUE COISA MAIS PERFEITA DE DEUS.' },
+            { image: 'imagens/foto24.png', title: 'KKKKKKK VESGUINHA DNV', description: 'ela olhando o a mecha do cabelinho lindo dela, que meiga que meiga' },
+            { image: 'imagens/foto25.png', title: 'esse olhar...', description: 'é pedir muito pra você me olhar pro resto da sua vida? é pedir MUITO?' },
+            { image: 'imagens/foto26.png', title: 'SONO', description: 'tava capotando de sono e lutando pra ficar conversando comigo(eu obriguei ela a sentar(repara nessa unha linda do kpt))' },
+            { image: 'imagens/foto27.png', title: 'RISADA', description: 'RISADA? DA MAIS RISADA, ME ENCHE COM SEU SORRISO ME EMPANTURRA COM SUA FELICIDADE' },
+            { image: 'imagens/foto28.png', title: 'AI PAPAI', description: 'preciso nem falar como eu AMO esse olhar, plmds que menina perfeita PRA MIM' },
+            { image: 'imagens/foto29.png', title: 'kkkkkkkkkNAO ME BATE PFV', description: 'ela, me, moggando, com, seus, biceps, carnudas, e, cabeludos' },
+            { image: 'imagens/foto30.png', title: 'EU MEREÇO?', description: 'hein hein hein mereço seu coração? é pra mim? é?' },
+            { image: 'imagens/foto31.png', title: 'o cabelo...', description: 'QUE CABELO LINDO QUE OLHO LINDO QUE UNHA LINDA, PASSA O RESTO DA SUA VIDA CMG MEU AMOR PFV' },
+            { image: 'imagens/foto32.png', title: 'CHORANDO PELO MEU CABELO', description: 'kkkkkkkkkkkkkkkmeu amor, não vou cortar até você conseguir vê-lo. MUITO OBRIGADO POR SE IMPORTAR TANTO COMIGO!' },
+            { image: 'imagens/foto33.png', title: 'OLHA ISSO', description: 'ELA DEITADA, A CAPINHA, TODA PENSATIVA - que composição linda meus amores, que composição  ' },
+            { image: 'imagens/foto34.png', title: 'A CARINHA', description: 'a carinha de atrevida mais perfeita que tem, sou completamente apaixonado.' },
+            { image: 'imagens/foto35.png', title: 'FILME BOM', description: 'aqui ela descobriu meu jeito de amar e como quero ter um relacionamento com ela, assistiu como se fosse a primeira vez e amou e eu amei ela mais um pouco.' }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const dotsContainer = document.getElementById('dots-container');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            let currentSlide = 0;
+            
+            // Criar slides
+            slidesData.forEach((slide, index) => {
+                const slideElement = document.createElement('div');
+                slideElement.classList.add('slide');
+                if (index === 0) slideElement.classList.add('active');
+                
+                slideElement.innerHTML = `
+                    <div class="image-container">
+                        <img src="${slide.image}" alt="Foto ${index + 1}" class="slide-img" 
+                             onerror="this.src='https://placehold.co/600x400/1a2a6c/ffffff?text=Foto+${index + 1}'">
+                    </div>
+                    <div class="slide-content">
+                        <h2 class="slide-title">${slide.title}</h2>
+                        <p class="slide-description">${slide.description}</p>
+                    </div>
+                `;
+                
+                carousel.appendChild(slideElement);
+            });
+            
+            const slides = document.querySelectorAll('.slide');
+            const slideImages = document.querySelectorAll('.slide-img');
+
+            // ✅ Agora só abre a imagem do slide ativo
+            document.querySelector('.carousel').addEventListener('click', (e) => {
+                if (e.target.classList.contains('slide-img')) {
+                    const slideInfo = slidesData[currentSlide];
+                    openModal(slideInfo.image, slideInfo.title);
+                }
+            });
+            
+            // Criar dots de navegação
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            });
+            
+            const dots = document.querySelectorAll('.dot');
+            
+            // Criar corações flutuantes
+            const heartsContainer = document.getElementById('hearts-container');
+            for (let i = 0; i < 25; i++) {
+                createHeart();
+            }
+            
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.classList.add('heart-shape');
+                
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 10 + 6) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                
+                heartsContainer.appendChild(heart);
+                
+                // Remover o coração após a animação e criar um novo
+                setTimeout(() => {
+                    heart.remove();
+                    createHeart();
+                }, 15000);
+            }
+            
+            // Função para ir para um slide específico
+            function goToSlide(n) {
+                slides[currentSlide].classList.remove('active');
+                dots[currentSlide].classList.remove('active');
+                
+                currentSlide = n;
+                
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+            
+            // Próximo slide
+            function nextSlide() {
+                let next = currentSlide + 1;
+                if (next >= slides.length) next = 0;
+                goToSlide(next);
+            }
+            
+            // Slide anterior
+            function prevSlide() {
+                let prev = currentSlide - 1;
+                if (prev < 0) prev = slides.length - 1;
+                goToSlide(prev);
+            }
+            
+            // Event listeners para os botões
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            
+            // Navegação por teclado
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') nextSlide();
+                if (e.key === 'ArrowLeft') prevSlide();
+            });
+            
+            // Fechar modal ao clicar no X
+            document.getElementById('closeModal').addEventListener('click', closeModal);
+            
+            // Fechar modal ao clicar fora da imagem
+            document.getElementById('imageModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+            
+            // Fechar modal com a tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        });
+        
+        // Função para abrir o modal com a imagem
+        function openModal(imageSrc, caption) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('expandedImage');
+            const captionText = document.getElementById('modalCaption');
+            
+            modal.classList.add('show');
+            modalImg.src = imageSrc;
+            captionText.innerHTML = caption;
+            
+            // Adiciona fallback se a imagem não carregar
+            modalImg.onerror = function() {
+                this.src = 'https://placehold.co/800x600/1a2a6c/ffffff?text=Imagem+Não+Encontrada';
+            };
+            
+            // Desabilita a rolagem da página principal
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Função para fechar o modal
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('show');
+            
+            // Habilita a rolagem da página principal
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>

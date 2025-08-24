@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Momentos em Vídeo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Menu de navegação */
+        .navigation-menu {
+            width: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 20px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(to right, #4e4376, #2b5876);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, #2b5876, #4e4376);
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(to right, #a3d9ff, #64b5f6);
+            color: #0a192f;
+            font-weight: bold;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a192f, #112240, #0a192f);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Backgrounds para fotos */
+        .photo-background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            opacity: 0.15;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .bg-photo-1 {
+            background-image: url('imagens/foto1.png');
+            clip-path: polygon(0 0, 100% 0, 100% 40%, 0 60%);
+        }
+        
+        .bg-photo-2 {
+            background-image: url('imagens/foto2.png');
+            clip-path: polygon(0 40%, 100% 60%, 100% 100%, 0 100%);
+        }
+        
+        .bg-photo-3 {
+            background-image: url('imagens/foto3.png');
+            clip-path: circle(25% at 75% 25%);
+        }
+        
+        .bg-photo-4 {
+            background-image: url('imagens/foto4.png');
+            clip-path: circle(20% at 25% 75%);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.85), rgba(17, 34, 64, 0.9), rgba(10, 25, 47, 0.85));
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            z-index: 2;
+            padding: 40px 20px;
+        }
+        
+        header {
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .heart {
+            color: #ff6b6b;
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+            text-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-size: 3.8rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            color: #a3d9ff;
+            background: linear-gradient(45deg, #a3d9ff, #64b5f6, #90caf9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 1.8s ease-out;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            color: #e3f2fd;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            margin: 50px 0 20px;
+            color: #a3d9ff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #a3d9ff, #64b5f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .video-card {
+            background: rgba(26, 42, 108, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(163, 217, 255, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        /* Estilo especial para vídeos BQ */
+        .video-card.special {
+            border: 3px solid #ff6b6b;
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.3);
+            position: relative;
+        }
+        
+        .video-card.special::before {
+            content: '🌟 ESPECIAL';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+            z-index: 10;
+            animation: pulse 2s infinite;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .video-card.special:hover {
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.4);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* Proporção 16:9 */
+            background: #0a192f;
+            overflow: hidden;
+        }
+        
+        .video-wrapper iframe,
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-info {
+            padding: 20px;
+        }
+        
+        .video-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #a3d9ff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-card.special .video-title {
+            color: #ff6b6b;
+        }
+        
+        .video-description {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #e3f2fd;
+        }
+        
+        .hearts-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .heart-shape {
+            position: absolute;
+            font-size: 24px;
+            color: #ff6b6b;
+            animation: floatHeart 8s linear infinite;
+            opacity: 0;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(110vh) rotate(0deg);
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        footer {
+            margin: 60px auto 30px;
+            font-size: 1.1rem;
+            color: #a3d9ff;
+            z-index: 2;
+            padding: 25px;
+            background: rgba(26, 42, 108, 0.3);
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Personaliza a barra de rolagem */
+        ::-webkit-scrollbar {
+            width: 14px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 25, 47, 0.8);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #4e4376, #2b5876);
+            border-radius: 10px;
+            border: 3px solid #0a192f;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #2b5876, #4e4376);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .videos-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .video-title {
+                font-size: 1.2rem;
+            }
+            
+            .video-description {
+                font-size: 0.9rem;
+            }
+            
+            footer {
+                margin: 40px auto 20px;
+                padding: 20px;
+            }
+            
+            /* Ajusta a barra de rolagem para mobile */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .video-info {
+                padding: 15px;
+            }
+            
+            .video-title {
+                font-size: 1.1rem;
+            }
+            
+            .video-description {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Backgrounds para fotos -->
+    <div class="photo-background bg-photo-1"></div>
+    <div class="photo-background bg-photo-2"></div>
+    <div class="photo-background bg-photo-3"></div>
+    <div class="photo-background bg-photo-4"></div>
+    <div class="overlay"></div>
+    
+    <!-- Menu de navegação -->
+    <nav class="navigation-menu">
+        <div class="nav-container">
+            <button class="nav-btn" onclick="navigateTo('index.html')">
+                <i class="fas fa-home"></i> Início
+            </button>
+            <button class="nav-btn" onclick="navigateTo('motivos-bonita.html')">
+                <i class="fas fa-camera"></i> Fotos
+            </button>
+            <button class="nav-btn active" onclick="navigateTo('videos.html')">
+                <i class="fas fa-video"></i> Vídeos
+            </button>
+        </div>
+    </nav>
+    
+    <div class="hearts-container" id="hearts-container"></div>
+    
+    <div class="container">
+        <header>
+            <div class="heart">❤</div>
+            <h1>Nossos momentos em vídeo</h1>
+            <div class="subtitle">memórias da minha paixão!</div>
+        </header>
+        
+        <h2 class="section-title">Nossos Vídeos</h2>
+        <div class="videos-container">
+            <!-- Vídeo 1 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail1.jpg">
+                        <source src="videos/video1.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">AU AU!!</h3>
+                    <p class="video-description">ASDKASKDSAKSADKA implicando com minha namorada</p>
+                </div>
+            </div>
+            
+            <!-- Vídeo 2 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail2.jpg">
+                        <source src="videos/video2.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">BALANÇA Y BALANÇA</h3>
+                    <p class="video-description">que linda ela dançandinho</p>
+                </div>
+            </div>
+            
+            <!-- Vídeo 3 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail3.jpg">
+                        <source src="videos/video3.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">SEDUZINDO</h3>
+                    <p class="video-description">🤤🤤🤤🤤🤤🤤</p>
+                </div>
+            </div>
+            
+            <!-- Vídeo 4 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail4.jpg">
+                        <source src="videos/video4.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">😜😝👅</h3>
+                    <p class="video-description">COMO EU ME DIVIRTO COM VOCÊ, MEU AMOR.</p>
+                </div>
+            </div>
+            
+            <!-- Vídeo 5 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail5.jpg">
+                        <source src="videos/video5.mp4" type="video/mmp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">minha gatinha</h3>
+                    <p class="video-description">maissss uma vez ela me seduzindo COM O DEDINHO</p>
+                </div>
+            </div>
+
+            <!-- Vídeo 6 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail6.jpg">
+                        <source src="videos/video6.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">FROZEN</h3>
+                    <p class="video-description">ELA FELIZINHA COM A PARTE PREFERIDA DELA, sem preço algum!! não troco por nada.</p>
+                </div>
+            </div>
+
+            <!-- Vídeo 7 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail7.jpg">
+                        <source src="videos/video7.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">DEDINHO</h3>
+                    <p class="video-description">PROMESSA DE DEDINHO, QUANTO AMOR❤️</p>
+                </div>
+            </div>
+
+            <!-- Vídeo 8 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail8.jpg">
+                        <source src="videos/video8.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">comida???</h3>
+                    <p class="video-description">EU GANHEI COMIDA????? E FOI DA MINHA NAMORADA!!!</p>
+                </div>
+            </div>
+
+            <!-- Vídeo 9 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail9.jpg">
+                        <source src="videos/video9.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">VÍDEO DA PRAIA</h3>
+                    <p class="video-description">SÓ PQ AMO AMO AMO SEU SORRISO NELE HIHIHIHIHI.</p>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Vídeos Especiais</h2>
+        <div class="videos-container">
+            <!-- Vídeos BQ com moldura vermelha - AGORA NO FINAL -->
+            <div class="video-card special">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail-bq1.jpg">
+                        <source src="videos/videobq1.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">QUANDO ELA RECEBEU</h3>
+                    <p class="video-description">TIVEEE QUE GRAVAR ESSES MOMENTOS MDS QUE LINDA</p>
+                </div>
+            </div>
+            
+            <div class="video-card special">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail-bq2.jpg">
+                        <source src="videos/videobq2.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">LIGOU</h3>
+                    <p class="video-description">KKKKKKKKKK ELA LIGANDO PRA HUMILHAR</p>
+                </div>
+            </div>
+            
+            <div class="video-card special">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail-bq3.jpg">
+                        <source src="videos/videobq3.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">CRIANÇA TIMIDA</h3>
+                    <p class="video-description">você forçandooo a rebeca interagir cmg</p>
+                </div>
+            </div>
+            
+            <div class="video-card special">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail-bq4.jpg">
+                        <source src="videos/videobq4.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">AMOSTRADINHAKKKKKKKKKK</h3>
+                    <p class="video-description">AI MEU AMOR, EU TE VIVO SINCERAMENTE</p>
+                </div>
+            </div>
+            
+            <div class="video-card special">
+                <div class="video-wrapper">
+                    <video controls poster="imagens/thumbnail-bq5.jpg">
+                        <source src="videos/videobq5.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">SUA FELICIDADE</h3>
+                    <p class="video-description">QUERO VER A PROXIMA FLORZINHA MEU AMOR</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            EU TE AMO MARIANA, MINHA PAIXÃO!<span class="heart" style="font-size: 1.2rem;">❤</span>
+        </footer>
+    </div>
+
+    <script>
+        // Função para navegação entre páginas
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        
+        // Criar corações flutuantes
+        document.addEventListener('DOMContentLoaded', function() {
+            const heartsContainer = document.getElementById('hearts-container');
+            
+            for (let i = 0; i < 25; i++) {
+                createHeart();
+            }
+            
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.classList.add('heart-shape');
+                
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 10 + 6) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                
+                heartsContainer.appendChild(heart);
+                
+                // Remover o coração após a animação e criar um novo
+                setTimeout(() => {
+                    heart.remove();
+                    createHeart();
+                }, 15000);
+            }
+        });
+    </script>
+</body>
+</html>

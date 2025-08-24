@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uma Surpresa Para Você</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a192f, #112240, #0a192f);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Backgrounds para fotos */
+        .photo-background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            opacity: 0.15;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .bg-photo-1 {
+            background-image: url('foto1.jpg');
+            clip-path: polygon(0 0, 100% 0, 100% 40%, 0 60%);
+        }
+        
+        .bg-photo-2 {
+            background-image: url('foto2.jpg');
+            clip-path: polygon(0 40%, 100% 60%, 100% 100%, 0 100%);
+        }
+        
+        .bg-photo-3 {
+            background-image: url('foto3.jpg');
+            clip-path: circle(25% at 75% 25%);
+        }
+        
+        .bg-photo-4 {
+            background-image: url('foto4.jpg');
+            clip-path: circle(20% at 25% 75%);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.85), rgba(17, 34, 64, 0.9), rgba(10, 25, 47, 0.85));
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            z-index: 2;
+            padding: 40px 20px;
+        }
+        
+        header {
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .heart {
+            color: #ff6b6b;
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+            text-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-size: 3.8rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            color: #a3d9ff;
+            background: linear-gradient(45deg, #a3d9ff, #64b5f6, #90caf9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 1.8s ease-out;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            color: #e3f2fd;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .content-box {
+            background: rgba(26, 42, 108, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            border: 1px solid rgba(163, 217, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            color: #e3f2fd;
+        }
+        
+        .photo-frame {
+            width: 320px;
+            height: 320px;
+            margin: 30px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 10px solid transparent;
+            background: linear-gradient(45deg, #4e4376, #2b5876, #1a2a6c);
+            background-origin: border-box;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transform: perspective(800px) rotateY(0deg);
+            transition: transform 0.7s ease, box-shadow 0.7s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .photo-frame:hover {
+            transform: perspective(800px) rotateY(10deg) scale(1.05);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+        }
+        
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #ff6b6b, #ff9e7d, #ff6b6b);
+            z-index: -1;
+            border-radius: 25px;
+            animation: borderGlow 3s infinite alternate;
+        }
+        
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 0.8; }
+        }
+        
+        .special-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #4e4376, #2b5876);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.4s ease;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, #2b5876, #4e4376);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .hearts-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .heart-shape {
+            position: absolute;
+            font-size: 24px;
+            color: #ff6b6b;
+            animation: floatHeart 8s linear infinite;
+            opacity: 0;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(110vh) rotate(0deg);
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .memory-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 50px 0;
+        }
+        
+        .memory-card {
+            width: 200px;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .memory-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px) rotate(3deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .memory-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .memory-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            opacity: 0.7;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .memory-card:hover::after {
+            opacity: 0.3;
+        }
+        
+        /* Modal para imagem expandida */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(163, 217, 255, 0.4);
+            animation: zoom 0.3s ease;
+        }
+        
+        @keyframes zoom {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .close:hover {
+            color: #ff6b6b;
+        }
+        
+        .modal-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #fff;
+            font-size: 1.2rem;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        footer {
+            margin: 60px auto 30px;
+            font-size: 1.1rem;
+            color: #a3d9ff;
+            z-index: 2;
+            padding: 25px;
+            background: rgba(26, 42, 108, 0.3);
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Personaliza a barra de rolagem */
+        ::-webkit-scrollbar {
+            width: 14px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 25, 47, 0.8);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #4e4376, #2b5876);
+            border-radius: 10px;
+            border: 3px solid #0a192f;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #2b5876, #4e4376);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            p {
+                font-size: 1.2rem;
+            }
+            
+            .photo-frame {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .memory-card {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+                max-height: 80%;
+            }
+            
+            .close {
+                top: 10px;
+                right: 15px;
+                font-size: 30px;
+            }
+            
+            footer {
+                margin: 40px auto 20px;
+                padding: 20px;
+            }
+            
+            /* Ajusta a barra de rolagem para mobile */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Backgrounds para fotos -->
+    <div class="photo-background bg-photo-1"></div>
+    <div class="photo-background bg-photo-2"></div>
+    <div class="photo-background bg-photo-3"></div>
+    <div class="photo-background bg-photo-4"></div>
+    <div class="overlay"></div>
+    
+    <!-- Modal para imagem expandida -->
+    <div id="imageModal" class="modal">
+        <span class="close" id="closeModal">&times;</span>
+        <img class="modal-content" id="expandedImage">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+    
+    <div class="hearts-container" id="hearts-container"></div>
+    
+    <div class="container">
+        <header>
+            <div class="heart">❤</div>
+            <h1>Uma surpresa especial</h1>
+            <div class="subtitle">para minha marianaa hihihi S2</div>
+        </header>
+        
+        <div class="content-box">
+            <p>oii, meu neném! fiz algo especial para expressar o quanto você é importante para mim e <strong>ALGUMAAAS</strong> das razões pelas quais te acho incrível!</p>
+            
+            <div class="photo-frame">
+                <img src="imagens/fotojulho.png" alt="Nossa foto especial" class="special-photo" onerror="this.src='https://placehold.co/400x400/1a2a6c/ffffff?text=Nossa+Foto+Especial'">
+            </div>
+            
+            <p>oii Julho!!!! olha nosso filho lindo, tava dormindo no travesseirinho dele todo pitico</p>
+        </div>
+        
+        <div class="content-box">
+            <h2 style="color: #a3d9ff; margin-bottom: 25px;">Como se fosse a primeira vez :D</h2>
+            
+            <div class="memory-section">
+                <div class="memory-card" onclick="openModal('imagens/primeiracall.png', 'nossa primeira call de vídeo 💖')">
+                    <img src="imagens/primeiracall.png" alt="Primeira call" onerror="this.src='https://placehold.co/200x200/1a2a6c/ffffff?text=Primeira+Call'">
+                </div>
+                <div class="memory-card" onclick="openModal('imagens/primeiraconversa.png', 'nossa primeira conversa 🥰')">
+                    <img src="imagens/primeiraconversa.png" alt="Primeira conversa" onerror="this.src='https://placehold.co/200x200/2b5876/ffffff?text=Primeira+Conversa'">
+                </div>
+                <div class="memory-card" onclick="openModal('imagens/primeiradormindo.png', 'nossa(sua) primeira vez dormindo juntinhos 😴')">
+                    <img src="imagens/primeiradormindo.png" alt="Primeira dormindo" onerror="this.src='https://placehold.co/200x200/4e4376/ffffff?text=Dormindo+Juntinhos'">
+                </div>
+            </div>
+            
+            <p>MINHA VIDA, eu AMOO cada momento ao seu lado! Clique nas fotos para ver em tamanho maior!</p>
+        </div>
+        
+        <p>clique no botão abaixo para descobrir a surpresa que preparei com todo meu amor.</p>
+        
+        <button class="btn" id="redirect-btn">
+            <i class="fas fa-gift" style="margin-right: 10px;"></i>
+            Ver Minha Surpresa Agora
+        </button>
+        
+        <footer>
+            Feito com <span class="heart" style="font-size: 1.2rem;">❤</span> especialmente para você - lippie
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Criar corações vermelhos flutuantes
+            const heartsContainer = document.getElementById('hearts-container');
+            for (let i = 0; i < 30; i++) {
+                createHeart();
+            }
+            
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.classList.add('heart-shape');
+                
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 10 + 6) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                
+                heartsContainer.appendChild(heart);
+                
+                // Remover o coração após a animação e criar um novo
+                setTimeout(() => {
+                    heart.remove();
+                    createHeart();
+                }, 15000);
+            }
+            
+            // Redirecionamento apenas ao clicar no botão
+            const redirectBtn = document.getElementById('redirect-btn');
+            
+            function redirectToSurprise() {
+                window.location.href = 'motivos-bonita.html';
+            }
+            
+            redirectBtn.addEventListener('click', redirectToSurprise);
+            
+            // Efeito de digitação no subtítulo
+            const subtitle = document.querySelector('.subtitle');
+            const originalText = subtitle.textContent;
+            subtitle.textContent = '';
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < originalText.length) {
+                    subtitle.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 80);
+                }
+            }
+            
+            setTimeout(typeWriter, 1500);
+            
+            // Fechar modal ao clicar no X
+            document.getElementById('closeModal').addEventListener('click', closeModal);
+            
+            // Fechar modal ao clicar fora da imagem
+            document.getElementById('imageModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+            
+            // Fechar modal com a tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        });
+        
+        // Função para abrir o modal com a imagem
+        function openModal(imageSrc, caption) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('expandedImage');
+            const captionText = document.getElementById('modalCaption');
+            
+            modal.classList.add('show');
+            modalImg.src = imageSrc;
+            captionText.innerHTML = caption;
+            
+            // Adiciona fallback se a imagem não carregar
+            modalImg.onerror = function() {
+                this.src = 'https://placehold.co/800x600/1a2a6c/ffffff?text=Imagem+Não+Encontrada';
+            };
+            
+            // Desabilita a rolagem da página principal
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Função para fechar o modal
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('show');
+            
+            // Habilita a rolagem da página principal
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
