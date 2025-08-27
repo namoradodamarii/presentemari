@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz para minha amori</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Menu de navegação */
+.navigation-menu {
+    position: relative; /* ou static */
+    top: auto;
+    left: auto;
+    width: 100%;
+    background: rgba(10, 25, 47, 0.95);
+    padding: 15px 0;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1; /* menor que o fixo */
+}
+
+        
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 20px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(to right, #4e4376, #2b5876);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, #2b5876, #4e4376);
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(to right, #a3d9ff, #64b5f6);
+            color: #0a192f;
+            font-weight: bold;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a192f, #112240, #0a192f);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+            padding-top: 70px; /* Espaço para a navigation bar fixa */
+        }
+        
+        /* Backgrounds para fotos */
+        .photo-background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            opacity: 0.15;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .bg-photo-1 {
+            background-image: url('foto1.jpg');
+            clip-path: polygon(0 0, 100% 0, 100% 40%, 0 60%);
+        }
+        
+        .bg-photo-2 {
+            background-image: url('foto2.jpg');
+            clip-path: polygon(0 40%, 100% 60%, 100% 100%, 0 100%);
+        }
+        
+        .bg-photo-3 {
+            background-image: url('foto3.jpg');
+            clip-path: circle(25% at 75% 25%);
+        }
+        
+        .bg-photo-4 {
+            background-image: url('foto4.jpg');
+            clip-path: circle(20% at 25% 75%);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.85), rgba(17, 34, 64, 0.9), rgba(10, 25, 47, 0.85));
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            z-index: 2;
+            padding: 40px 20px;
+        }
+        
+        header {
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .heart {
+            color: #ff6b6b;
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+            text-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-size: 3.8rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            color: #a3d9ff;
+            background: linear-gradient(45deg, #a3d9ff, #64b5f6, #90caf9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 1.8s ease-out;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            color: #e3f2fd;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .content-box {
+            background: rgba(26, 42, 108, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            border: 1px solid rgba(163, 217, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            color: #e3f2fd;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #4e4376, #2b5876);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.4s ease;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, #2b5876, #4e4376);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .hearts-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .heart-shape {
+            position: absolute;
+            font-size: 24px;
+            color: #ff6b6b;
+            animation: floatHeart 8s linear infinite;
+            opacity: 0;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(110vh) rotate(0deg);
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        footer {
+            margin: 60px auto 30px;
+            font-size: 1.1rem;
+            color: #a3d9ff;
+            z-index: 2;
+            padding: 25px;
+            background: rgba(26, 42, 108, 0.3);
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Estilos para o quiz */
+        .quiz-container {
+            width: 100%;
+            text-align: left;
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(163, 217, 255, 0.3);
+        }
+        
+        .progress-container {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+        
+        .progress-bar {
+            height: 14px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 8px rgba(163, 217, 255, 0.3) inset;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4b7d, #a64bf4, #4fc3f7);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 12px rgba(255, 75, 125, 0.6);
+        }
+        
+        .question-number {
+            font-size: 1.2rem;
+            color: #a3d9ff;
+            text-align: right;
+        }
+        
+        .question-text {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #e3f2fd;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            background: rgba(163, 217, 255, 0.1);
+            border: 2px solid rgba(163, 217, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .option:hover {
+            background: rgba(163, 217, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .option.selected {
+            background: rgba(78, 67, 118, 0.4);
+            border-color: #a3d9ff;
+            box-shadow: 0 0 15px rgba(163, 217, 255, 0.4);
+        }
+        
+        .option.correct {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4caf50;
+        }
+        
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.3);
+            border-color: #f44336;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-btn-quiz {
+            background: linear-gradient(to right, #4e4376, #2b5876);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-btn-quiz:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-btn-quiz:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .results-container {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .final-score {
+            font-size: 3rem;
+            color: #ff9e7d;
+            margin: 20px 0;
+            text-shadow: 0 0 15px rgba(255, 158, 125, 0.6);
+        }
+        
+        .message {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #e3f2fd;
+        }
+        
+        /* Personaliza a barra de rolagem */
+        ::-webkit-scrollbar {
+            width: 14px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 25, 47, 0.8);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #4e4376, #2b5876);
+            border-radius: 10px;
+            border: 3px solid #0a192f;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #2b5876, #4e4376);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            p {
+                font-size: 1.2rem;
+            }
+            
+            .question-text {
+                font-size: 1.5rem;
+            }
+            
+            .option {
+                padding: 15px;
+                font-size: 1.1rem;
+            }
+            
+            .quiz-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .progress-container {
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-btn-quiz {
+                width: 100%;
+            }
+            
+            footer {
+                margin: 40px auto 20px;
+                padding: 20px;
+            }
+            
+            /* Ajusta a barra de rolagem para mobile */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu de navegação -->
+    <nav class="navigation-menu">
+        <div class="nav-container">
+            <button class="nav-btn" onclick="navigateTo('index.html')">
+                <i class="fas fa-home"></i> Início
+            </button>
+            <button class="nav-btn" onclick="navigateTo('motivo-bonita.html')">
+                <i class="fas fa-camera"></i> Fotos
+            </button>
+            <button class="nav-btn" onclick="navigateTo('videos.html')">
+                <i class="fas fa-video"></i> Vídeos
+            </button>
+            <button class="nav-btn active" onclick="navigateTo('quiz.html')">
+                <i class="fas fa-question-circle"></i> Quiz
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Backgrounds para fotos -->
+    <div class="photo-background bg-photo-1"></div>
+    <div class="photo-background bg-photo-2"></div>
+    <div class="photo-background bg-photo-3"></div>
+    <div class="photo-background bg-photo-4"></div>
+    <div class="overlay"></div>
+    
+    <div class="hearts-container" id="hearts-container"></div>
+    
+    <div class="container">
+        <header>
+            <div class="heart">❤</div>
+            <h1>Quiz do nosso amor (26/08/2025)</h1>
+            <div class="subtitle">Para minha amori 💖</div>
+        </header>
+        
+        <div class="content-box">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-number" id="question-number">1/20</div>
+                </div>
+                
+                <div id="question-container">
+                    <div class="question-text" id="question">Pergunta carregando...</div>
+                    
+                    <div class="options-container" id="options-container">
+                        <!-- As opções serão inseridas via JavaScript -->
+                    </div>
+                    
+                    <div class="navigation-buttons">
+                        <button class="nav-btn-quiz" id="prev-btn" disabled>
+                            <i class="fas fa-arrow-left"></i> Anterior
+                        </button>
+                        <button class="nav-btn-quiz" id="next-btn">
+                            Próxima <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="nav-btn-quiz" id="submit-btn" style="display: none;">
+                            Ver Resultado <i class="fas fa-star"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="results-container" class="results-container" style="display: none;">
+                    <h2>Resultado Final</h2>
+                    <div class="final-score" id="final-score">0/20</div>
+                    <div class="message" id="result-message"></div>
+                    <button class="btn" id="restart-btn">
+                        <i class="fas fa-redo"></i> Fazer Novamente
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            Feito com <span class="heart" style="font-size: 1.2rem;">❤</span> especialmente para você - lippie
+        </footer>
+    </div>
+
+    <script>
+        // Função para navegação entre páginas
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Criar corações vermelhos flutuantes
+            const heartsContainer = document.getElementById('hearts-container');
+            for (let i = 0; i < 30; i++) {
+                createHeart();
+            }
+            
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.classList.add('heart-shape');
+                
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 10 + 6) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                
+                heartsContainer.appendChild(heart);
+                
+                // Remover o coração após a animação e criar um novo
+                setTimeout(() => {
+                    heart.remove();
+                    createHeart();
+                }, 15000);
+            }
+            
+            // Quiz Logic - 20 PERGUNTAS
+            const questions = [
+                {
+                    question: "Qual jogo favorito do seu namorado?",
+                    options: ["Undertale", "Minecraft", "Mobile Legends", "Clash Royale"],
+                    correct: 0 // Undertale ✓
+                },
+                {
+                    question: "QUAL DAS SEGUINTES PODE BEBER????",
+                    options: ["Caipirinha", "Café", "Energético", "Água"],
+                    correct: 3 // Água ✓
+                },
+                {
+                    question: "Qual a data mais importante a seguir?",
+                    options: ["13/12/2004", "28/04/2007", "26/07/2020", "16/01/2026"],
+                    correct: 2 // 26/07/2020 ✓
+                },
+                {
+                    question: "Qual é a minha sobremesa favorita?",
+                    options: ["Pudim", "Torta", "Sorvete", "Brigadeiro"],
+                    correct: 1 // Torta ✓
+                },
+                {
+                    question: "O que eu mais faço para matar a saudades de você?",
+                    options: ["Mando mensagem", "Vejo suas fotos", "Ligo para você", "Converso sobre você"],
+                    correct: 3 // Converso sobre você ✓
+                },
+                {
+                    question: "Qual é minha orientação sexual?",
+                    options: ["Hétero", "Bissexual", "Marissexual", "Lésbico"],
+                    correct: 2 // Marissexual ✓
+                },
+                {
+                    question: "O que eu mais gosto de ouvir você dizer?",
+                    options: ["Meu coração tá tuqui tuqui", "Te amo", "Bufu", "Deu um quente"],
+                    correct: 0 // Meu coração tá tuqui tuqui ✓
+                },
+                {
+                    question: "Qual é a minha estação do ano preferida?",
+                    options: ["Verão", "Inferno", "Calor", "Ciará"],
+                    correct: 3 // Ciará ✓
+                },
+                {
+                    question: "Qual momento seu namorado ficou mais emocionado?",
+                    options: ["Falando sobre os medos do relacionamento", "No dia que ganhou flores e mostrou para a mãe", "No dia que mandei flores para você e várias pessoas viram", "No dia que você falou que eu não preciso falar que te amo pra você se sentir amada"],
+                    correct: 0 // Falando sobre os medos do relacionamento ✓
+                },
+                {
+                    question: "Qual é a qualidade que eu mais destaco em você?",
+                    options: ["Romântica", "Inteligência", "Comunicação", "Beleza"],
+                    correct: 3 // Beleza ✓
+                },
+                {
+                    question: "Qual parte de você eu mais elogio?",
+                    options: ["Cabelo", "Sorriso", "Olhos", "Corpo"],
+                    correct: 2 // Olhos ✓
+                },
+                {
+                    question: "O que eu sempre faço antes de dormir?",
+                    options: ["Coloco uma música para gente", "Dou um beijo no porquinho", "Espero para ver se você acorda", "Jogo Mobile Legends"],
+                    correct: 2 // Espero para ver se você acorda ✓
+                },
+                {
+                    question: "Qual é a minha cor favorita?",
+                    options: ["Roxo", "Preto", "Cinza", "Azul"],
+                    correct: 2 // Cinza ✓
+                },
+                {
+                    question: "O que eu mais gosto no nosso tempo junto?",
+                    options: ["Assistir filmes", "Declarações e promessas", "Safadezas (GF)", "Conversas"],
+                    correct: 3 // Conversas ✓
+                },
+                {
+                    question: "Qual é a minha música favorita para nós?",
+                    options: ["Via de 2 - uma Póvoas", "BB (Garupa de Moto Amarela) - Tim Bernardes", "Bem - Chapéu de Palha", "her - JVKE"],
+                    correct: 1 // BB (Garupa de Moto Amarela) - Tim Bernardes ✓
+                },
+                {
+                    question: "Qual foi a primeira promessa que te fiz?",
+                    options: ["Que vou te amar para sempre", "Que seria seu último e melhor romance", "Em janeiro, entregarei a próxima com minhas próprias mãos", "Vou esperar colado na parede"],
+                    correct: 3 // Vou esperar colado na parede ✓
+                },
+                {
+                    question: "O que me fez me apaixonar por ti?",
+                    options: ["Como você me trata", "Sua aparência", "O buquê com um girassol", "Seu jeito de ser"],
+                    correct: 3 // Seu jeito de ser ✓
+                },
+                {
+                    question: "Qual meu maior sonho no momento",
+                    options: ["Ser efetivado", "Ter meus lindos 2 filhos", "Ter uma casa própria", "Dar certo pra valer com minha namorada"],
+                    correct: 3 // Dar certo pra valer com minha namorada ✓
+                },
+                {
+                    question: "Qual é o amor da Mariana Abreu da Silva?",
+                    options: ["Memphis Depay", "Espelho que tudo vê", "Corinthians", "lippie"],
+                    correct: 3 // lippie ✓
+                },
+                {
+                    question: "O que nosso amor representa para o seu namorado?",
+                    options: ["Eternidade", "Verdade", "Esperança", "Paz"],
+                    correct: 2 // Esperança ✓
+                }
+            ];
+            
+            let currentQuestion = 0;
+            let score = 0;
+            let userAnswers = new Array(questions.length).fill(-1);
+            
+            const questionElement = document.getElementById('question');
+            const optionsContainer = document.getElementById('options-container');
+            const progressElement = document.getElementById('progress');
+            const questionNumberElement = document.getElementById('question-number');
+            const prevButton = document.getElementById('prev-btn');
+            const nextButton = document.getElementById('next-btn');
+            const submitButton = document.getElementById('submit-btn');
+            const questionContainer = document.getElementById('question-container');
+            const resultsContainer = document.getElementById('results-container');
+            const finalScoreElement = document.getElementById('final-score');
+            const resultMessageElement = document.getElementById('result-message');
+            const restartButton = document.getElementById('restart-btn');
+            
+            function loadQuestion() {
+                const question = questions[currentQuestion];
+                questionElement.textContent = question.question;
+                
+                optionsContainer.innerHTML = '';
+                question.options.forEach((option, index) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('option');
+                    if (userAnswers[currentQuestion] === index) {
+                        optionElement.classList.add('selected');
+                    }
+                    optionElement.textContent = option;
+                    optionElement.addEventListener('click', () => selectOption(index));
+                    optionsContainer.appendChild(optionElement);
+                });
+                
+                updateProgress();
+                updateNavigation();
+            }
+            
+            function selectOption(index) {
+                userAnswers[currentQuestion] = index;
+                
+                // Remove selected class from all options
+                const options = optionsContainer.querySelectorAll('.option');
+                options.forEach(option => option.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                options[index].classList.add('selected');
+                
+                updateNavigation();
+            }
+            
+            function updateProgress() {
+                const progress = ((currentQuestion + 1) / questions.length) * 100;
+                progressElement.style.width = `${progress}%`;
+                questionNumberElement.textContent = `${currentQuestion + 1}/${questions.length}`;
+            }
+            
+            function updateNavigation() {
+                prevButton.disabled = currentQuestion === 0;
+                nextButton.disabled = userAnswers[currentQuestion] === -1;
+                
+                if (currentQuestion === questions.length - 1) {
+                    nextButton.style.display = 'none';
+                    submitButton.style.display = 'block';
+                } else {
+                    nextButton.style.display = 'block';
+                    submitButton.style.display = 'none';
+                }
+            }
+            
+            function showResults() {
+                // Verifica se todas as questões foram respondidas
+                const unansweredIndex = userAnswers.findIndex(ans => ans === -1);
+                if (unansweredIndex !== -1) {
+                    alert(`Você deixou a questão ${unansweredIndex + 1} em branco!`);
+                    currentQuestion = unansweredIndex;
+                    loadQuestion();
+                    return;
+                }
+                
+                // Recalcular score
+                score = 0;
+                for (let i = 0; i < questions.length; i++) {
+                    if (userAnswers[i] === questions[i].correct) {
+                        score++;
+                    }
+                }
+
+                questionContainer.style.display = 'none';
+                resultsContainer.style.display = 'block';
+
+                finalScoreElement.textContent = `${score}/${questions.length}`;
+
+                if (score === questions.length) {
+                    resultMessageElement.textContent = 'PERFEITOOO AMORRR SABE MUITO AI MDS EU TE AMO ❤️';
+                } else if (score >= questions.length * 0.7) {
+                    resultMessageElement.textContent = 'foii bemmm, conhece bastante noizi hihihi 💖';
+                } else if (score >= questions.length * 0.5) {
+                    resultMessageElement.textContent = 'METADE SERVE NÉ? DA PRA CASAR???? DA? TOMARA 😊';
+                } else {
+                    resultMessageElement.textContent = 'nem vou comentar, sorte que gosto💕';
+                }
+            }
+            
+            function restartQuiz() {
+                currentQuestion = 0;
+                score = 0;
+                userAnswers = new Array(questions.length).fill(-1);
+
+                // volta para a tela de perguntas
+                resultsContainer.style.display = 'none';
+                questionContainer.style.display = 'block';
+
+                // estado inicial dos botões
+                nextButton.style.display = 'block';
+                submitButton.style.display = 'none';
+                nextButton.disabled = true;
+
+                // recarrega a primeira questão
+                loadQuestion();
+            }
+            
+            prevButton.addEventListener('click', () => {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    loadQuestion();
+                }
+            });
+            
+            nextButton.addEventListener('click', () => {
+                if (userAnswers[currentQuestion] === -1) {
+                    alert("Responda a questão antes de prosseguir!");
+                    return;
+                }
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    loadQuestion();
+                }
+            });
+
+            submitButton.addEventListener('click', showResults);
+            restartButton.addEventListener('click', restartQuiz);
+            
+            // Initialize quiz
+            loadQuestion();
+        });
+    </script>
+</body>
+</html>
