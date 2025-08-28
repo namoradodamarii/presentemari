@@ -13,18 +13,23 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        /* Menu de navegação */
-.navigation-menu {
-    position: relative; /* ou static */
-    top: auto;
-    left: auto;
-    width: 100%;
-    background: rgba(10, 25, 47, 0.95);
-    padding: 15px 0;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1; /* menor que o fixo */
-}
-
+        /* Menu de navegação - MODIFICADO */
+        .navigation-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .navigation-menu.hidden {
+            transform: translateY(-100%);
+        }
         
         .nav-container {
             max-width: 900px;
@@ -506,7 +511,7 @@
             <button class="nav-btn" onclick="navigateTo('index.html')">
                 <i class="fas fa-home"></i> Início
             </button>
-            <button class="nav-btn" onclick="navigateTo('motivo-bonita.html')">
+            <button class="nav-btn" onclick="navigateTo('fotos.html')">
                 <i class="fas fa-camera"></i> Fotos
             </button>
             <button class="nav-btn" onclick="navigateTo('videos.html')">
@@ -587,6 +592,25 @@
         function navigateTo(page) {
             window.location.href = page;
         }
+        
+        // Código para esconder a barra de navegação ao rolar
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navigation-menu');
+        const navbarHeight = navbar.offsetHeight;
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > navbarHeight) {
+                // Rolar para baixo - esconder navbar
+                navbar.classList.add('hidden');
+            } else {
+                // Rolar para cima - mostrar navbar
+                navbar.classList.remove('hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
         
         document.addEventListener('DOMContentLoaded', function() {
             // Criar corações vermelhos flutuantes

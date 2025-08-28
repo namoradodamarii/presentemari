@@ -1,4 +1,3 @@
-</html>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,20 +13,23 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        /* Menu de navegação */
-        /* Menu de navegação */
-.navigation-menu {
-    /* REMOVA esta linha: position: fixed; */
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(10, 25, 47, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 15px 0;
-    z-index: 1000;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-}
-
+        /* Menu de navegação - MODIFICADO */
+        .navigation-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .navigation-menu.hidden {
+            transform: translateY(-100%);
+        }
         
         .nav-container {
             max-width: 900px;
@@ -65,19 +67,18 @@
             font-weight: bold;
         }
         
-/* Remova também o padding-top do body */
-body {
-    background: linear-gradient(135deg, #0a192f, #112240, #0a192f);
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    overflow-x: hidden;
-    /* REMOVA esta linha: padding-top: 70px; */
-}
+        body {
+            background: linear-gradient(135deg, #0a192f, #112240, #0a192f);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+            padding-top: 70px; /* Adicionado para compensar a barra fixa */
+        }
         
         /* Backgrounds para fotos */
         .photo-background {
@@ -247,6 +248,7 @@ body {
         .slide-content {
             max-width: 85%;
             padding: 0 15px;
+            margin-top: 20px;
         }
         
         .slide-title {
@@ -293,19 +295,17 @@ body {
             background: linear-gradient(to right, #2b5876, #4e4376);
         }
         
-.dots-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 25px;
-    gap: 8px;
-    max-width: 90%;
-    padding: 0 15px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            gap: 8px;
+            max-width: 90%;
+            padding: 0 15px;
+            margin-left: auto;
+            margin-right: auto;
+        }
         
         .dot {
             width: 12px;
@@ -590,7 +590,7 @@ body {
             <button class="nav-btn" onclick="navigateTo('index.html')">
                 <i class="fas fa-home"></i> Início
             </button>
-            <button class="nav-btn active" onclick="navigateTo('motivo-bonita.html')">
+            <button class="nav-btn active" onclick="navigateTo('fotos.html')">
                 <i class="fas fa-camera"></i> Fotos
             </button>
             <button class="nav-btn" onclick="navigateTo('videos.html')">
@@ -653,7 +653,26 @@ body {
             window.location.href = page;
         }
         
-        // Dados para as 35 fotos e motivos
+        // Código para esconder a barra de navegação ao rolar
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navigation-menu');
+        const navbarHeight = navbar.offsetHeight;
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > navbarHeight) {
+                // Rolar para baixo - esconder navbar
+                navbar.classList.add('hidden');
+            } else {
+                // Rolar para cima - mostrar navbar
+                navbar.classList.remove('hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Dados para as 35 fotos и мотивы
         const slidesData = [
             { image: 'imagens/foto1.png', title: 'A PRINCIPAL, minha vesguinha', description: 'e como eu poderia deixar de fora a minha vesguinha preferida????' },
             { image: 'imagens/foto2.png', title: 'PRIMEIRA VEZ QUE CONSEGUIII COMPRAR COMIDINHA PRA ELA', description: 'olha essa lindeza comendo e ficando buxuda, SÓ pra mim!!!!!!!!' },
@@ -675,7 +694,7 @@ body {
             { image: 'imagens/foto18.png', title: 'SE ARRUMOU CMG', description: 'ESSE TU SABE CLARAMENTEE, se arrumou rapidinho pq tava cheia de presa e FEZ questão de fazer call cmg antes de ir mesmo estando atrasadinha AI - detalhe pre capinha' },
             { image: 'imagens/foto19.png', title: 'AS TOQUINHAS DUPLAS', description: 'PARA TUDO, A DUPLA MAIS LABUBÔNICA DE TOQUINHAAAAAAAAAAAA DESSE MUNDO.' },
             { image: 'imagens/foto20.png', title: 'eu amo amo amo essa foto', description: 'QUE COISA LINDA, ela expressando com os olhinhos todos seus sentimentos enquanto faz uma oferenda com o Julho hihihi' },
-            { image: 'imagens/foto21.png', title: 'SOU APAIXONADO', description: 'MANO, QUE MINA É ESSA TIO QUE COISA LINDA FAZENDO X PRA MIM AI AI COMO QUE CASA? CD A ALIANÇA NESSES DEDO' },
+            { image: 'imagens/foto21.png', title: 'SOU APAIXONADO', description: 'MANO, QUE MINA É ESSA TIO QUE COISA LINDA FAZENGO X PRA MIM AI AI COMO QUE CASA? CD A ALIANÇA NESSES DEDO' },
             { image: 'imagens/foto22.png', title: 'OI GATINHA (HELLO KITTY)', description: 'A I M D S, que gatinha minha gatinha PFV PFV CASA CO EU eu qwuero você pra toddo semprie' },
             { image: 'imagens/foto23.png', title: 'LENDO TEXTINHO', description: 'ELA LENDO O MEU TEXTINHO E CHORANDINHO, QUE COISA MAIS PERFEITA DE DEUS.' },
             { image: 'imagens/foto24.png', title: 'KKKKKKK VESGUINHA DNV', description: 'ela olhando o a mecha do cabelinho lindo dela, que meiga que meiga' },
