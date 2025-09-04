@@ -57,10 +57,10 @@
         }
         
         .password-screen h2 {
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             color: #a3d9ff;
             margin-bottom: 15px;
-            animation: pulse 1.5s infinite alternate;
+            animation: pulse 1.5s infinite  ;
             text-align: center;
         }
         
@@ -658,6 +658,104 @@
             opacity: 0.8;
         }
         
+        /* Estilos para o novo contador de tempo */
+        .time-together-container {
+            background: rgba(26, 42, 108, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(163, 217, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1s ease-out;
+        }
+        
+        .time-together-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #a3d9ff;
+            text-align: center;
+        }
+        
+        .time-together-value {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.time-box {
+    background: rgba(26, 42, 108, 0.6);
+    border-radius: 12px;
+    padding: 15px 10px;
+    min-width: 80px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(163, 217, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff9e7d;
+    text-shadow: 0 0 10px rgba(255, 158, 125, 0.5);
+    margin-bottom: 5px;
+}
+
+.time-label {
+    font-size: 0.9rem;
+    color: #e3f2fd;
+    opacity: 0.8;
+}
+        
+        .time-together-value span {
+            font-weight: bold;
+            color: #e3f2fd;
+        }
+        
+        .meeting-dates-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .meeting-date-box {
+            background: rgba(26, 42, 108, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(163, 217, 255, 0.2);
+        }
+        
+        .meeting-date-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #a3d9ff;
+            text-align: center;
+        }
+        
+        .meeting-date-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #ff9e7d;
+            text-shadow: 0 0 10px rgba(255, 158, 125, 0.5);
+            text-align: center;
+        }
+        
+        .meeting-date-description {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            color: #e3f2fd;
+            opacity: 0.8;
+            text-align: center;
+        }
+        
         /* Personaliza a barra de rolagem */
         ::-webkit-scrollbar {
             width: 14px;
@@ -770,6 +868,36 @@
                 font-size: 1.8rem;
             }
             
+            .time-together-title {
+                font-size: 1.5rem;
+            }
+            
+            .time-together-value {
+        gap: 10px;
+    }
+    
+    .time-box {
+        min-width: 70px;
+        padding: 12px 8px;
+    }
+    
+    .time-number {
+        font-size: 1.7rem;
+    }
+    
+    .time-label {
+        font-size: 0.8rem;
+    }
+            
+            .meeting-date-box {
+                min-width: 160px;
+                padding: 15px;
+            }
+            
+            .meeting-date-value {
+                font-size: 1.8rem;
+            }
+            
             /* Ajusta a barra de rolagem para mobile */
             ::-webkit-scrollbar {
                 width: 8px;
@@ -845,6 +973,37 @@
                 width: 100%;
                 max-width: 250px;
             }
+            
+            .time-together-title {
+                font-size: 1.3rem;
+            }
+            
+            .time-together-value {
+        gap: 8px;
+    }
+    
+    .time-box {
+        min-width: 60px;
+        padding: 10px 6px;
+    }
+    
+    .time-number {
+        font-size: 1.5rem;
+    }
+    
+    .time-label {
+        font-size: 0.75rem;
+    }
+            
+            .meeting-dates-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .meeting-date-box {
+                width: 100%;
+                max-width: 250px;
+            }
         }
 
         @media (max-width: 360px) {
@@ -872,6 +1031,14 @@
             
             h1 {
                 font-size: 1.8rem;
+            }
+            
+            .time-together-title {
+                font-size: 1.2rem;
+            }
+            
+            .time-together-value {
+                font-size: 1rem;
             }
         }
     </style>
@@ -942,6 +1109,59 @@
                 <h1>Uma surpresa especial</h1>
                 <div class="subtitle">para minha marianaa hihihi S2</div>
             </header>
+            
+            <!-- Nova seção: Tempo juntos -->
+<div class="time-together-container">
+    <h2 class="time-together-title">Há quanto tempo nos conhecemos</h2>
+    <div id="time-together" class="time-together-value">
+        <div class="time-box">
+            <span id="years" class="time-number">0</span>
+            <span class="time-label">anos</span>
+        </div>
+        <div class="time-box">
+            <span id="months" class="time-number">0</span>
+            <span class="time-label">meses</span>
+        </div>
+        <div class="time-box">
+            <span id="days" class="time-number">0</span>
+            <span class="time-label">dias</span>
+        </div>
+        <div class="time-box">
+            <span id="hours" class="time-number">0</span>
+            <span class="time-label">horas</span>
+        </div>
+        <div class="time-box">
+            <span id="minutes" class="time-number">0</span>
+            <span class="time-label">minutos</span>
+        </div>
+        <div class="time-box">
+            <span id="seconds" class="time-number">0</span>
+            <span class="time-label">segundos</span>
+        </div>
+    </div>
+    <p>desde 26/07/2020 às 15:12 ❤️</p>
+</div>
+            
+            <!-- Nova seção: Datas de encontro -->
+            <div class="content-box">
+                <h2 style="color: #a3d9ff; margin-bottom: 25px;">Quando nos veremos</h2>
+                
+                <div class="meeting-dates-container">
+                    <div class="meeting-date-box">
+                        <div class="meeting-date-title">Encontro de Outubro</div>
+                        <div id="days-remaining-1" class="meeting-date-value">0</div>
+                        <div class="meeting-date-description">dias até 17/10/2025</div>
+                    </div>
+                    
+                    <div class="meeting-date-box">
+                        <div class="meeting-date-title">Encontro de Janeiro</div>
+                        <div id="days-remaining-2" class="meeting-date-value">0</div>
+                        <div class="meeting-date-description">dias até 17/01/2026</div>
+                    </div>
+                </div>
+                
+                <p>Mal posso esperar para te ver! ❤️</p>
+            </div>
             
             <div class="content-box">
                 <h2 style="color: #a3d9ff; margin-bottom: 25px;">Nossa linha do tempo</h2>
@@ -1030,7 +1250,7 @@
             let currentPassword = '';
             let isPasswordVisible = false;
 
-            // Verifica se a senha já foi digitada na sessão
+            // Verifica if a senha já foi digitada na sessão
             if (sessionStorage.getItem('accessGranted') === 'true') {
                 showContent();
             } else {
@@ -1139,6 +1359,65 @@
                 }
             }
 
+            // Função para calcular o tempo desde que nos conhecemos
+            function calculateTimeTogether() {
+                const startDate = new Date(2020, 6, 26, 15, 12, 0); // 26/07/2020 às 15:12
+                const currentDate = new Date();
+                
+                // Calcula a diferença em milissegundos
+                let diff = currentDate - startDate;
+                
+                // Calcula anos
+                const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+                diff -= years * (1000 * 60 * 60 * 24 * 365.25);
+                
+                // Calcula meses
+                const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30.44));
+                diff -= months * (1000 * 60 * 60 * 24 * 30.44);
+                
+                // Calcula dias
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                diff -= days * (1000 * 60 * 60 * 24);
+                
+                // Calcula horas
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                diff -= hours * (1000 * 60 * 60);
+                
+                // Calcula minutos
+                const minutes = Math.floor(diff / (1000 * 60));
+                diff -= minutes * (1000 * 60);
+                
+                // Calcula segundos
+                const seconds = Math.floor(diff / 1000);
+                
+                // Atualiza os elementos HTML
+                document.getElementById('years').textContent = years;
+                document.getElementById('months').textContent = months;
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+            }
+
+            // Função para calcular dias até as datas de encontro
+            function calculateDaysToMeeting() {
+                const currentDate = new Date();
+                
+                // Primeiro encontro: 17/10/2025
+                const meetingDate1 = new Date(2025, 9, 17); // Mês é 0-based (9 = outubro)
+                const diffTime1 = meetingDate1 - currentDate;
+                const diffDays1 = Math.ceil(diffTime1 / (1000 * 60 * 60 * 24));
+                
+                // Segundo encontro: 17/01/2026
+                const meetingDate2 = new Date(2026, 0, 17); // Mês é 0-based (0 = janeiro)
+                const diffTime2 = meetingDate2 - currentDate;
+                const diffDays2 = Math.ceil(diffTime2 / (1000 * 60 * 60 * 24));
+                
+                // Atualiza os elementos HTML
+                document.getElementById('days-remaining-1').textContent = diffDays1;
+                document.getElementById('days-remaining-2').textContent = diffDays2;
+            }
+
             // Função para inicializar os scripts da página principal
             function initializeMainEffects() {
                 // Redirecionamento apenas ao clicar no botão
@@ -1238,6 +1517,16 @@
                     document.getElementById('days-remaining').textContent = diffDaysRemaining;
                 }
                 updateDayCounters();
+                
+                // Inicializa os novos contadores
+                calculateTimeTogether();
+                calculateDaysToMeeting();
+                
+                // Atualiza os contadores a cada segundo
+                setInterval(function() {
+                    calculateTimeTogether();
+                    calculateDaysToMeeting();
+                }, 1000);
             }
         });
     </script>
