@@ -1156,32 +1156,14 @@
                     <div class="meeting-date-box">
                         <div class="meeting-date-title">Encontro de Janeiro</div>
                         <div id="days-remaining-2" class="meeting-date-value">0</div>
-                        <div class="meeting-date-description">dias até 17/01/2026</div>
-                    </div>
-                </div>
-                
-                <p>Mal posso esperar para te ver! ❤️</p>
-            </div>
-            
-            <div class="content-box">
-                <h2 style="color: #a3d9ff; margin-bottom: 25px;">Nossa linha do tempo</h2>
-                
-                <div class="counters-container">
-                    <div class="counter-box">
-                        <div class="counter-title">Dias juntos</div>
-                        <div id="days-passed" class="counter-value">0</div>
-                        <div class="counter-description">desde 26/07/2020</div>
-                    </div>
-                    
-                    <div class="counter-box">
-                        <div class="counter-title">Dias viagem</div>
-                        <div id="days-remaining" class="counter-value">0</div>
-                        <div class="counter-description">até 16/01/2026</div>
+                        <div class="meeting-date-description">dias até 16/01/2026</div>
                     </div>
                 </div>
                 
                 <p>amo estar ao seu lado, vamos fazer acontecer! ❤️</p>
             </div>
+            
+            <!-- Seção removida: Nossa linha do tempo -->
             
             <div class="content-box">
                 <p>oii, meu neném! fiz algo especial para expressar o quanto você é importante para mim e <strong>ALGUMAAAS</strong> das razões pelas quais te acho incrível!</p>
@@ -1273,7 +1255,7 @@
                 // Inicializa os efeitos da página principal
                 initializeMainEffects();
                 
-                // Inicializa a navegação com scroll
+                // Inicializa a navegação avec scroll
                 navbarHeight = navbar.offsetHeight;
                 window.addEventListener('scroll', handleNavbarScroll);
             }
@@ -1408,8 +1390,8 @@
                 const diffTime1 = meetingDate1 - currentDate;
                 const diffDays1 = Math.ceil(diffTime1 / (1000 * 60 * 60 * 24));
                 
-                // Segundo encontro: 17/01/2026
-                const meetingDate2 = new Date(2026, 0, 17); // Mês é 0-based (0 = janeiro)
+                // Segundo encontro: 16/01/2026 (alterado para 16/01/2026)
+                const meetingDate2 = new Date(2026, 0, 16); // Mês é 0-based (0 = janeiro)
                 const diffTime2 = meetingDate2 - currentDate;
                 const diffDays2 = Math.ceil(diffTime2 / (1000 * 60 * 60 * 24));
                 
@@ -1507,14 +1489,20 @@
                 // Calcular e atualizar os contadores de dias
                 function updateDayCounters() {
                     const startDate = new Date(2020, 6, 26);
-                    const futureDate = new Date(2026, 0, 16);
+                    const futureDate = new Date(2026, 0, 16); // Alterado para 16/01/2026
                     const currentDate = new Date();
                     const diffTimePassed = currentDate - startDate;
                     const diffDaysPassed = Math.floor(diffTimePassed / (1000 * 60 * 60 * 24));
                     const diffTimeRemaining = futureDate - currentDate;
                     const diffDaysRemaining = Math.floor(diffTimeRemaining / (1000 * 60 * 60 * 24));
-                    document.getElementById('days-passed').textContent = diffDaysPassed;
-                    document.getElementById('days-remaining').textContent = diffDaysRemaining;
+                    
+                    // Atualiza os elementos HTML se existirem
+                    if (document.getElementById('days-passed')) {
+                        document.getElementById('days-passed').textContent = diffDaysPassed;
+                    }
+                    if (document.getElementById('days-remaining')) {
+                        document.getElementById('days-remaining').textContent = diffDaysRemaining;
+                    }
                 }
                 updateDayCounters();
                 
@@ -1526,6 +1514,7 @@
                 setInterval(function() {
                     calculateTimeTogether();
                     calculateDaysToMeeting();
+                    updateDayCounters();
                 }, 1000);
             }
         });
