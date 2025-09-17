@@ -593,6 +593,9 @@
             <button class="nav-btn active" onclick="navigateTo('fotos.html')">
                 <i class="fas fa-camera"></i> Fotos
             </button>
+            <button class="nav-btn" onclick="navigateTo('screenshots.html')">
+                <i class="fas fa-image"></i> Screenshots
+            </button>
             <button class="nav-btn" onclick="navigateTo('videos.html')">
                 <i class="fas fa-video"></i> Vídeos
             </button>
@@ -622,7 +625,7 @@
         <header>
             <div class="heart">❤</div>
             <h1>Motivos de eu ser apaixonado por você</h1>
-            <div class="subtitle">35 razões que fazem meu coração bater mais forte</div>
+            <div class="subtitle">100 razões que fazem meu coração bater mais forte</div>
         </header>
         
         <div class="carousel">
@@ -672,8 +675,9 @@
             lastScrollTop = scrollTop;
         });
         
-        // Dados para as 35 fotos и мотивы
+        // Dados para as 100 fotos e motivos
         const slidesData = [
+            // As primeiras 35 fotos mantêm os títulos e descrições originais
             { image: 'imagens/foto1.png', title: 'A PRINCIPAL, minha vesguinha', description: 'e como eu poderia deixar de fora a minha vesguinha preferida????' },
             { image: 'imagens/foto2.png', title: 'PRIMEIRA VEZ QUE CONSEGUIII COMPRAR COMIDINHA PRA ELA', description: 'olha essa lindeza comendo e ficando buxuda, SÓ pra mim!!!!!!!!' },
             { image: 'imagens/foto3.png', title: 'ASDKASDKASDK primeira vez da peppaa', description: 'que coisinha mais linda minha carmed fini, meu senhor.' },
@@ -708,7 +712,74 @@
             { image: 'imagens/foto32.png', title: 'CHORANDO PELO MEU CABELO', description: 'kkkkkkkkkkkkkkkmeu amor, não vou cortar até você conseguir vê-lo. MUITO OBRIGADO POR SE IMPORTAR TANTO COMIGO!' },
             { image: 'imagens/foto33.png', title: 'OLHA ISSO', description: 'ELA DEITADA, A CAPINHA, TODA PENSATIVA - que composição linda meus amores, que composição  ' },
             { image: 'imagens/foto34.png', title: 'A CARINHA', description: 'a carinha de atrevida mais perfeita que tem, sou completamente apaixonado.' },
-            { image: 'imagens/foto35.png', title: 'FILME BOM', description: 'aqui ela descobriu meu jeito de amar e como quero ter um relacionamento com ela, assistiu como se fosse a primeira vez e amou e eu amei ela mais um pouco.' }
+            { image: 'imagens/foto35.png', title: 'FILME BOM', description: 'aqui ela descobriu meu jeito de amar e como quero ter um relacionamento com ela, assistiu como se fosse a primeira vez e amou e eu amei ela mais um pouco.' },
+            
+            // Fotos 36 a 100 com o padrão EU TE AMO, EU TE VIVO, EU TE DESEJO
+            { image: 'imagens/foto36.jpg', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto37.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto38.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto39.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto40.jpg', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto41.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto42.jpg', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto43.jpg', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto44.jpg', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto45.jpg', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto46.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto47.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto48.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto49.jpg', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto50.jpg', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto51.jpg', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto52.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto53.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto54.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto55.jpg', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto56.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto57.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto58.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto59.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto60.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto61.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto62.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto63.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto64.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto65.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto66.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto67.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto68.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto69.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto70.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto71.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto72.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto73.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto74.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto75.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto76.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto77.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto78.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto79.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto80.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto81.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto82.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto83.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto84.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto85.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto86.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto87.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto88.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto89.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto90.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto91.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto92.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto93.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto94.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto95.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto96.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto97.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' },
+            { image: 'imagens/foto98.png', title: 'EU TE DESEJO', description: 'EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO EU TE DESEJO' },
+            { image: 'imagens/foto99.png', title: 'EU TE AMO', description: 'EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO EU TE AMO' },
+            { image: 'imagens/foto100.png', title: 'EU TE VIVO', description: 'EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO EU TE VIVO' }
         ];
 
         document.addEventListener('DOMContentLoaded', function() {
