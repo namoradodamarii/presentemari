@@ -1152,15 +1152,9 @@
                 
                 <div class="meeting-dates-container">
                     <div class="meeting-date-box">
-                        <div class="meeting-date-title">Encontro de Outubro</div>
+                        <div class="meeting-date-title">Nosso Encontro</div>
                         <div id="days-remaining-1" class="meeting-date-value">0</div>
-                        <div class="meeting-date-description">dias até 17/10/2025</div>
-                    </div>
-                    
-                    <div class="meeting-date-box">
-                        <div class="meeting-date-title">Encontro de Janeiro</div>
-                        <div id="days-remaining-2" class="meeting-date-value">0</div>
-                        <div class="meeting-date-description">dias até 16/01/2026</div>
+                        <div class="meeting-date-description">dias até 01/10/2025</div>
                     </div>
                 </div>
                 
@@ -1385,23 +1379,17 @@
                 document.getElementById('seconds').textContent = seconds;
             }
 
-            // Função para calcular dias até as datas de encontro
+            // Função para calcular dias até o encontro
             function calculateDaysToMeeting() {
                 const currentDate = new Date();
                 
-                // Primeiro encontro: 17/10/2025
-                const meetingDate1 = new Date(2025, 9, 17); // Mês é 0-based (9 = outubro)
-                const diffTime1 = meetingDate1 - currentDate;
-                const diffDays1 = Math.ceil(diffTime1 / (1000 * 60 * 60 * 24));
+                // Nosso encontro: 01/10/2025
+                const meetingDate = new Date(2025, 9, 1); // Mês é 0-based (9 = outubro), dia 1
+                const diffTime = meetingDate - currentDate;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                 
-                // Segundo encontro: 16/01/2026 (alterado para 16/01/2026)
-                const meetingDate2 = new Date(2026, 0, 16); // Mês é 0-based (0 = janeiro)
-                const diffTime2 = meetingDate2 - currentDate;
-                const diffDays2 = Math.ceil(diffTime2 / (1000 * 60 * 60 * 24));
-                
-                // Atualiza os elementos HTML
-                document.getElementById('days-remaining-1').textContent = diffDays1;
-                document.getElementById('days-remaining-2').textContent = diffDays2;
+                // Atualiza o elemento HTML
+                document.getElementById('days-remaining-1').textContent = diffDays;
             }
 
             // Função para inicializar os scripts da página principal
@@ -1493,7 +1481,7 @@
                 // Calcular e atualizar os contadores de dias
                 function updateDayCounters() {
                     const startDate = new Date(2020, 6, 26);
-                    const futureDate = new Date(2026, 0, 16); // Alterado para 16/01/2026
+                    const futureDate = new Date(2025, 9, 1); // Alterado para 01/10/2025
                     const currentDate = new Date();
                     const diffTimePassed = currentDate - startDate;
                     const diffDaysPassed = Math.floor(diffTimePassed / (1000 * 60 * 60 * 24));
